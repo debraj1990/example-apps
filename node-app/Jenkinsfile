@@ -6,20 +6,25 @@ pipeline {
 
   stages {
     
-    stage('checkout') {
+    stage('Checkout') {
       steps {
         git 'https://github.com/nagabhushanamn/example-apps'
       }
     }
 
-    stage('unit tests') {
+    stage('Test') {
       steps {
         dir('node-app') {
          sh 'npm i'
          sh 'npm test'
         }
+      },
+      post {
+        always {
+          step([$class: 'CoberturaPublisher', coberturaReportFile: 'output/coverage/jest/cobertura-coverage.xml'])
+        }
       }
     }
-    
+
   }
 }
