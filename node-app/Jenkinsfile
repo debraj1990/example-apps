@@ -12,10 +12,17 @@ pipeline {
       }
     }
 
+    stage('Install dependencies') {
+      steps {
+        dir('node-app') {
+        sh 'npm install'
+        }
+      }
+    }
+
     stage('Test') {
       steps {
         dir('node-app') {
-         sh 'npm i'
          sh 'npm test'
         }
       }
