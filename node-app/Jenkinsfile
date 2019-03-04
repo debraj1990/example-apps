@@ -59,6 +59,19 @@ pipeline {
 			steps { runUAT(88) }
 		}
 
+    stage("Approve") {
+      steps { approve() }
+		}
+
+    stage("Deploy - Live") {
+      steps { deploy('live') }
+		}
+
+		stage("Test - UAT Live") {
+      steps { runUAT(80) }
+		}
+
+
 	}
 
 }
@@ -84,6 +97,10 @@ def deploy(environment) {
 		containerName = "app_stage"
 		port = "88"
 	}
+  else if ("${environment}" == 'live') {
+		containerName = "app_live"
+		port = "80"
+	}
 	else {
 		println "Environment not valid"
 		System.exit(0)
@@ -99,5 +116,14 @@ def deploy(environment) {
 def runUAT(port) {
   sh 'chmod +x node-app/__tests__/runUAT.sh'
 	sh "node-app/__tests__/runUAT.sh ${port}"
+}
+
+
+def approve() {
+
+	timeout(time:1, unit:'DAYS') {
+		input('Do you want to deploy to live?')
+	}
+
 }
 
