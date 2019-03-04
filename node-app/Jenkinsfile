@@ -8,7 +8,7 @@ pipeline {
       disableConcurrentBuilds()
   }
 
-  tools {nodejs "node"}
+  // tools {nodejs "node"}
 
   stages {
     
