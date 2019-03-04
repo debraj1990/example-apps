@@ -1,7 +1,7 @@
 #!/usr/bin/groovy
 
 pipeline {
-  
+
   agent any
 
   options {
@@ -19,6 +19,9 @@ pipeline {
     }
 
     stage('Install dependencies') {
+      agent {
+        docker { image 'node:7-alpine' }
+      }
       steps {
         dir('node-app') {
         sh 'npm install'
@@ -27,6 +30,9 @@ pipeline {
     }
 
     stage('Test') {
+      agent {
+        docker { image 'node:7-alpine' }
+      }
       steps {
         dir('node-app') {
          sh 'npm test'
@@ -71,12 +77,9 @@ pipeline {
       steps { runUAT(80) }
 		}
 
-
 	}
 
 }
-
- 
 
 // steps
 def buildApp() {
@@ -84,11 +87,10 @@ def buildApp() {
 		def appImage = docker.build("nagabhushanamn/myapp:${BUILD_NUMBER}")
 	}
 }
-def deploy(environment) {
 
+def deploy(environment) {
 	def containerName = ''
 	def port = ''
-
 	if ("${environment}" == 'dev') {
 		containerName = "app_dev"
 		port = "8888"
@@ -105,25 +107,19 @@ def deploy(environment) {
 		println "Environment not valid"
 		System.exit(0)
 	}
-
 	sh "docker ps -f name=${containerName} -q | xargs --no-run-if-empty docker stop"
 	sh "docker ps -a -f name=${containerName} -q | xargs -r docker rm"
 	sh "docker run -d -p ${port}:3000 --name ${containerName} nagabhushanamn/myapp:${BUILD_NUMBER}"
-
 }
-
 
 def runUAT(port) {
   sh 'chmod +x node-app/__tests__/runUAT.sh'
 	sh "node-app/__tests__/runUAT.sh ${port}"
 }
 
-
 def approve() {
-
 	timeout(time:1, unit:'DAYS') {
 		input('Do you want to deploy to live?')
 	}
-
 }
 
