@@ -45,7 +45,7 @@ pipeline {
       }
     }
 
-/*
+  /*
     stage("Build") {
         steps { buildApp() }
 		}
@@ -78,9 +78,11 @@ pipeline {
       steps { runUAT(80) }
 		}
 
+    */
+
 	}
 
-  */
+  
 
 }
 
