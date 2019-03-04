@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Node-app' });
+router.get('/', function (req, res, next) {
+  res.render('index', { title: 'welcome to Node-app' });
 });
 
 module.exports = router;
