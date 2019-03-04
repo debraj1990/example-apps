@@ -11,7 +11,7 @@ sleep 5
 # ping the app
 status_code=$(curl --write-out %{http_code} --out /dev/null --silent ${hostname}:${port})
 
-expected_code=200
+expected_code='200'
 
 if [ $status_code -eq $expected_code ];
 then
