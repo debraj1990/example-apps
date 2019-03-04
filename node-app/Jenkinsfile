@@ -80,6 +80,10 @@ def deploy(environment) {
 		containerName = "app_dev"
 		port = "8888"
 	} 
+  else if ("${environment}" == 'stage') {
+		containerName = "app_stage"
+		port = "88"
+	}
 	else {
 		println "Environment not valid"
 		System.exit(0)
