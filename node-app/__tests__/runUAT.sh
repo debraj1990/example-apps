@@ -13,7 +13,7 @@ status_code=$(curl --write-out %{http_code} --out /dev/null --silent ${hostname}
 
 expected_code=200
 
-if [ $status_code == $expected_code ];
+if [ $status_code -eq $expected_code ];
 then
 	echo "PASS: ${hostname}:${port} is reachable"
 else
