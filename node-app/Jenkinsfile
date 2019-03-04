@@ -36,14 +36,14 @@ pipeline {
     stage("Build") {
         steps { buildApp() }
 		}
-     stage("Deploy - Dev") {
+    stage("Deploy - Dev") {
         steps { deploy('dev') }
 		}
 
 	}
 
-  }
 }
+
 
 
 // steps
