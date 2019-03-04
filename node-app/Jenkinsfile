@@ -93,6 +93,7 @@ def deploy(environment) {
 
 
 def runUAT(port) {
+  sh 'chmod +x node-app/__tests__/runUAT.sh'
 	sh "node-app/__tests__/runUAT.sh ${port}"
 }
 
