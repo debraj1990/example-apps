@@ -4,6 +4,10 @@ pipeline {
   
   agent any
 
+  options {
+      disableConcurrentBuilds()
+  }
+
   tools {nodejs "node"}
 
   stages {
@@ -40,7 +44,19 @@ pipeline {
 		}
 
     stage("Deploy - Dev") {
-        steps { deploy('dev') }
+      steps { deploy('dev') }
+		}
+    
+    stage("Test - UAT Dev") {
+			steps { runUAT(8888) }
+		}
+
+		stage("Deploy - Stage") {
+			steps { deploy('stage') }
+		}
+
+		stage("Test - UAT Stage") {
+			steps { runUAT(88) }
 		}
 
 	}
@@ -75,4 +91,8 @@ def deploy(environment) {
 
 }
 
+
+def runUAT(port) {
+	sh "node-app/__tests__/runUAT.sh ${port}"
+}
 
