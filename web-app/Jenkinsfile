@@ -1,50 +1,33 @@
 #!/usr/bin/groovy
-
+// by Nag
 pipeline {
-
   agent any
-
   options {
       disableConcurrentBuilds()
   }
-
-  // tools {nodejs "node"}
-
-  environment {
-    HOME = '.'
-  }
-
+  tools {nodejs "node"}
   stages {
-    
     stage('Checkout') {
       steps {
         git 'https://github.com/nagabhushanamn/example-apps'
       }
     }
-
     stage('Install dependencies') {
-      agent {
-        docker { image 'node:7-alpine' }
-      }
       steps {
-        dir('node-app') {
+        dir('web-app') {
         sh 'npm install'
         }
       }
     }
-
     stage('Test') {
-      agent {
-        docker { image 'node:7-alpine' }
-      }
       steps {
-        dir('node-app') {
+        dir('web-app') {
          sh 'npm test'
         }
       }
       post {
         always {
-          step([$class: 'CoberturaPublisher', coberturaReportFile: 'node-app/output/coverage/jest/cobertura-coverage.xml'])
+          step([$class: 'CoberturaPublisher', coberturaReportFile: 'web-app/output/coverage/jest/cobertura-coverage.xml'])
         }
       }
     }
