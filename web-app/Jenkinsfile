@@ -32,11 +32,12 @@ pipeline {
       }
     }
 
-  /*
+  
     stage("Build") {
         steps { buildApp() }
 		}
 
+    /*
     stage("Deploy - Dev") {
       steps { deploy('dev') }
 		}
@@ -74,8 +75,9 @@ pipeline {
 }
 
 // steps
+
 def buildApp() {
-	dir ('node-app' ) {
+	dir ('web-app' ) {
 		def appImage = docker.build("nagabhushanamn/myapp:${BUILD_NUMBER}")
 	}
 }
