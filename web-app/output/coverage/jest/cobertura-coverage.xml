@@ -1,11 +1,11 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="35" lines-covered="29" line-rate="0.8286" branches-valid="4" branches-covered="0" branch-rate="0" timestamp="1551639003296" complexity="0" version="0.1">
+<coverage lines-valid="36" lines-covered="30" line-rate="0.8332999999999999" branches-valid="4" branches-covered="0" branch-rate="0" timestamp="1551847326152" complexity="0" version="0.1">
   <sources>
-    <source>/Users/nag-training/Desktop/example-apps/node-app</source>
+    <source>/Users/nag-training/Desktop/example-apps/web-app</source>
   </sources>
   <packages>
-    <package name="node-app" line-rate="0.8" branch-rate="0">
+    <package name="web-app" line-rate="0.8" branch-rate="0">
       <classes>
         <class name="app.js" filename="app.js" line-rate="0.8" branch-rate="0">
           <methods>
@@ -50,13 +50,13 @@
         </class>
       </classes>
     </package>
-    <package name="node-app.routes" line-rate="0.9" branch-rate="1">
+    <package name="web-app.routes" line-rate="0.9091" branch-rate="1">
       <classes>
-        <class name="index.js" filename="routes/index.js" line-rate="0.8" branch-rate="1">
+        <class name="index.js" filename="routes/index.js" line-rate="0.8332999999999999" branch-rate="1">
           <methods>
             <method name="(anonymous_0)" hits="0" signature="()V">
               <lines>
-                <line number="4" hits="0"/>
+                <line number="7" hits="0"/>
               </lines>
             </method>
           </methods>
@@ -64,8 +64,9 @@
             <line number="1" hits="1" branch="false"/>
             <line number="2" hits="1" branch="false"/>
             <line number="4" hits="1" branch="false"/>
-            <line number="5" hits="0" branch="false"/>
-            <line number="8" hits="1" branch="false"/>
+            <line number="7" hits="1" branch="false"/>
+            <line number="8" hits="0" branch="false"/>
+            <line number="11" hits="1" branch="false"/>
           </lines>
         </class>
         <class name="users.js" filename="routes/users.js" line-rate="1" branch-rate="1">
