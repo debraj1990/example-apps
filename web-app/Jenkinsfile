@@ -46,7 +46,6 @@ pipeline {
 			steps { runUAT(8888) }
 		}
 
-    /*
 
 		stage("Deploy - Stage") {
 			steps { deploy('stage') }
@@ -68,7 +67,7 @@ pipeline {
       steps { runUAT(80) }
 		}
 
-    */
+    
 
 	}
 
@@ -113,7 +112,7 @@ def deploy(environment) {
 
 def runUAT(port) {
   sh 'chmod +x node-app/__tests__/runUAT.sh'
-	sh "node-app/__tests__/runUAT.sh ${port}"
+	sh "web-app/__tests__/runUAT.sh ${port}"
 }
 
 def approve() {
