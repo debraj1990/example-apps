@@ -15,14 +15,14 @@ pipeline {
     }
     stage('Install dependencies') {
       steps {
-        dir('products-catalog-v2') {
+        dir('PM') {
         sh 'npm install'
         }
       }
     }
     stage('Test') {
       steps {
-        dir('products-catalog-v2') {
+        dir('PM') {
          sh 'npm test'
         }
       }
@@ -42,9 +42,9 @@ pipeline {
       steps { deploy('dev') }
 		}
     
-    stage("Test - UAT Dev") {
-			steps { runUAT(8888) }
-		}
+    // stage("Test - UAT Dev") {
+		// 	steps { runUAT(8888) }
+		// }
 
 		// stage("Deploy - Stage") {
 		// 	steps { deploy('stage') }
@@ -62,9 +62,9 @@ pipeline {
       steps { deploy('live') }
 		}
 
-		stage("Test - UAT Live") {
-      steps { runUAT(80) }
-		}
+		// stage("Test - UAT Live") {
+    //   steps { runUAT(80) }
+		// }
     
 
 	}
@@ -73,7 +73,7 @@ pipeline {
 
 def buildApp() {
 	dir ('web-app' ) {
-		def appImage = docker.build("nagabhushanamn/products-catalog:${BUILD_NUMBER}")
+		def appImage = docker.build("nagabhushanamn/PM:${BUILD_NUMBER}")
 	}
 }
 
@@ -82,16 +82,16 @@ def deploy(environment) {
 	def port = ''
 	
   if ("${environment}" == 'dev') {
-		containerName = "products-catalog-dev"
+		containerName = "PM-dev"
 		port = "8888"
 	} 
   
   else if ("${environment}" == 'stage') {
-		containerName = "products-catalog-stage"
+		containerName = "PM-stage"
 		port = "88"
 	}
   else if ("${environment}" == 'live') {
-		containerName = "products-catalog-live"
+		containerName = "PM-live"
 		port = "80"
 	}
 	else {
@@ -101,12 +101,12 @@ def deploy(environment) {
 
 	sh "docker ps -f name=${containerName} -q | xargs --no-run-if-empty docker stop"
 	sh "docker ps -a -f name=${containerName} -q | xargs -r docker rm"
-	sh "docker run -d -p ${port}:3000 --name ${containerName} nagabhushanamn/products-catalog:${BUILD_NUMBER}"
+	sh "docker run -d -p ${port}:3000 --name ${containerName} nagabhushanamn/PM:${BUILD_NUMBER}"
 }
 
 def runUAT(port) {
-  sh 'chmod +x products-catalog-v2/__tests__/runUAT.sh'
-	sh "products-catalog-v2/__tests__/runUAT.sh ${port}"
+  sh 'chmod +x PM/__tests__/runUAT.sh'
+	sh "PM/__tests__/runUAT.sh ${port}"
 }
 
 def approve() {
