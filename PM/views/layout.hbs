@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous">
+</head>
+
+<body class="container">
+
+  <hr />
+
+  <ul class="nav">
+    {{#if user}}
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link" href="/products">View-all</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/products/new">Add-New</a>
+      </li>
+    </ul>
+
+    <li class="nav-item">
+      <a class="nav-link" href="/users/logout">logout</a>
+    </li>
+
+    {{else}}
+
+    <li class="nav-item">
+      <a class="nav-link" href="/users/login">Login</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="/users/register">Register</a>
+    </li>
+    
+    {{/if}}
+  </ul>
+
+  <hr />
+
+  {{{body}}}
+
+  <hr />
+
+</body>
+
+</html>
