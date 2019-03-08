@@ -72,7 +72,7 @@ pipeline {
 }
 
 def buildApp() {
-	dir ('web-app' ) {
+	dir ('PM' ) {
 		def appImage = docker.build("nagabhushanamn/pm:${BUILD_NUMBER}")
 	}
 }
