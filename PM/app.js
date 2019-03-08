@@ -26,7 +26,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //--------------------------------------------------------------
-let url = "mongodb://localhost:27017/products-catalog"
+let url = "mongodb://user:user123@ds113402.mlab.com:13402/products-catalog"
 mongoose.connect(url, { useNewUrlParser: true })
   .then(() => {
     console.log("connected with mongodb");
