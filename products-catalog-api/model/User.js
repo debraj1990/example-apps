@@ -19,7 +19,7 @@ var UserSchema = new Schema({
 });
 
 UserSchema.methods.generateJwt = function () {
-    var token = jwt.sign({ _id: this.id }, 'shhhhh',{expiresIn:'1m'});
+    var token = jwt.sign({ _id: this.id,role:'ADMIN' }, 'shhhhh',{expiresIn:'1d'});
     return token;
 }
 

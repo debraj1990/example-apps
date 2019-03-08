@@ -18,6 +18,7 @@ module.exports = {
                     return res.status(500).send({ auth: false, mssage: 'Token Authentication Failed' })
                 else {
                     req._id = decoded._id
+                    req.role = decoded.role;
                     next()
                 }
             })

@@ -5,7 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var passport = require('passport');
+
+
 var session = require('express-session');
+const flash = require('connect-flash');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -20,8 +23,12 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
+app.use(flash());
+
+//--------------------------------------------------------------
 
 require('./config/passport')(passport);
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -36,11 +43,14 @@ mongoose.connect(url, { useNewUrlParser: true })
   })
 //--------------------------------------------------------------
 
-
 app.use(function (req, res, next) {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
   res.locals.user = req.user || null;
   next();
 });
+
+//--------------------------------------------------------------
 
 
 // view engine setup

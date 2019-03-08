@@ -9,8 +9,9 @@ var Review = require('../model/Review')
 var auth = require('../helpers/auth')
 
 router
-    .get('/' /* , auth.ensureAuthenticated */, function (req, res, next) {
+    .get('/', auth.ensureAuthenticated, function (req, res, next) {
         console.log(req._id);
+        console.log(req.role);
         Product.find({})
             .then(products => {
                 res.json(products)

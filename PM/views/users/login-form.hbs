@@ -1,7 +1,16 @@
 <div class="row">
     <div class="col-sm-6 col-md-6">
+        {{#if errors}}
+        <div class="alert alert-danger">{{message}}</div>
+        {{/if}}
         {{#if error}}
         <div class="alert alert-danger">{{error}}</div>
+        {{/if}}
+        {{#if success_msg}}
+        <div class="alert alert-info">{{success_msg}}</div>
+        {{/if}}
+        {{#if error_msg}}
+        <div class="alert alert-danger">{{success_msg}}</div>
         {{/if}}
         <div class="card">
             <div class="card-header"> New User</div>

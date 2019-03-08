@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../model/User')
 
 module.exports = function (passport) {
+
     passport.use(new LocalStrategy({ usernameField: 'userName' }, (userName, password, done) => {
         User.findOne({
             userName: userName
@@ -23,6 +24,9 @@ module.exports = function (passport) {
             })
         })
     }));
+
+    //...
+
     passport.serializeUser(function (user, done) {
         done(null, user.id);
     });

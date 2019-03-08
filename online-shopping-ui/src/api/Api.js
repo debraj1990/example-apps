@@ -11,7 +11,7 @@ const Api = {
         return Promise.resolve()
     },
     loadProducts(type, size) {
-        return axios.get(apiURl)
+        return axios.get(apiURl,{headers:{'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzdlNWU0OGQwMWMyMTM1Nzk3OGM4MjMiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE1NTIwMjE1MzgsImV4cCI6MTU1MjEwNzkzOH0.0s389vRuEPHMONs3TCBXxjsNAptLUqNP6sDJaasSsrU'}})
     },
     loadReviews(productId, size) {
         return axios.get(apiURl + `/${productId}/reviews`)
