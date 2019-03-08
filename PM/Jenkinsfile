@@ -21,6 +21,12 @@ pipeline {
       }
     }
     stage('Test') {
+      agent {
+        docker {
+          reuseNode true
+          image 'mongo'
+        }
+      }
       steps {
         dir('PM') {
          sh 'npm test'
