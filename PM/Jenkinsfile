@@ -73,7 +73,7 @@ pipeline {
 
 def buildApp() {
 	dir ('web-app' ) {
-		def appImage = docker.build("nagabhushanamn/PM:${BUILD_NUMBER}")
+		def appImage = docker.build("nagabhushanamn/pm:${BUILD_NUMBER}")
 	}
 }
 
@@ -82,16 +82,16 @@ def deploy(environment) {
 	def port = ''
 	
   if ("${environment}" == 'dev') {
-		containerName = "PM-dev"
+		containerName = "pm-dev"
 		port = "8888"
 	} 
   
   else if ("${environment}" == 'stage') {
-		containerName = "PM-stage"
+		containerName = "pm-stage"
 		port = "88"
 	}
   else if ("${environment}" == 'live') {
-		containerName = "PM-live"
+		containerName = "pm-live"
 		port = "80"
 	}
 	else {
@@ -101,7 +101,7 @@ def deploy(environment) {
 
 	sh "docker ps -f name=${containerName} -q | xargs --no-run-if-empty docker stop"
 	sh "docker ps -a -f name=${containerName} -q | xargs -r docker rm"
-	sh "docker run -d -p ${port}:3000 --name ${containerName} nagabhushanamn/PM:${BUILD_NUMBER}"
+	sh "docker run -d -p ${port}:3000 --name ${containerName} nagabhushanamn/pm:${BUILD_NUMBER}"
 }
 
 def runUAT(port) {
